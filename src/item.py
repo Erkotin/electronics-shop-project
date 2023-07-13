@@ -8,6 +8,7 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    initialized = False  # Add initialized class variable
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -35,21 +36,17 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        cls.all.clear()
         current_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(current_dir, 'items.csv')
 
         with open(file_path, 'r') as file:
             reader = csv.DictReader(file)
-            next(reader)
             for row in reader:
                 name = row['name']
                 price = float(row['price'])
                 quantity = int(row['quantity'])
-                item = cls('', price, quantity)  # Create the item with an empty name
-                item.name = name  # Set the name explicitly
-
-
-
+                item = cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(value: str) -> float:

@@ -1,7 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
-import os
-import csv
+
 
 
 def test_calculate_total_price():
@@ -43,4 +42,18 @@ def test_apply_discount_with_multiple_items():
     assert item3.price == 27.0
     assert item4.price == 13.5
 
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()  # Create objects from the CSV file
+    assert len(Item.all) == 5  # Expecting 5 items from the file
+
+    # Verify the names of the items
+    expected_names = ['Смартфон', 'Ноутбук', 'Кабель', 'Мышка', 'Клавиатура']
+    for i, item in enumerate(Item.all):
+        assert item.name == expected_names[i]
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
 
