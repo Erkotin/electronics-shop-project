@@ -73,3 +73,15 @@ class Item:
         """
         self.price = self.price * self.pay_rate
         return self.price
+
+    def __repr__(self) -> str:
+        """
+        Возвращает строковое представление объекта .
+        """
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        """
+        Возвращает строковое представление объекта для использования str().
+        """
+        return self.__name
