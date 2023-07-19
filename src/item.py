@@ -85,3 +85,8 @@ class Item:
         Возвращает строковое представление объекта для использования str().
         """
         return self.__name
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise TypeError(f"Unsupported operand type for +: {type(self).__name__} and {type(other).__name__}")
+        return self.quantity + other.quantity
